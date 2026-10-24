@@ -4,9 +4,6 @@ import ProductList from "./ProductList";
 
 function ProductCatalog({
   products,
-  loading,
-  error,
-  onRetry,
   onAddToCart,
   onViewDetail,
 }) {
@@ -49,7 +46,6 @@ function ProductCatalog({
   }
 
   function renderProducts() {
-    if (loading || error) return null;
     if (filteredProducts.length === 0) {
       return (
         <div className="rounded-shop border border-dashed border-[#cfcfcf] bg-white px-5 py-[65px] text-center">
@@ -177,49 +173,6 @@ function ProductCatalog({
         </div>
       </div>
 
-      {loading && (
-        <div
-          className="mt-[18px] flex items-center gap-[15px] rounded-shop border border-[#ddd] bg-[#ededed] p-[15px] sm:px-[22px] sm:py-[18px]"
-          role="status"
-        >
-          <span className="size-[23px] shrink-0 animate-spin rounded-full border-2 border-[#ccc] border-t-[#222] motion-reduce:animate-none" />
-          <div>
-            <strong className="text-[15px] font-medium">
-              Loading products...
-            </strong>
-            <p className="mt-[3px] text-xs text-[#666]">
-              กำลังโหลดสินค้าจาก Fake Store API
-            </p>
-          </div>
-        </div>
-      )}
-      {error && (
-        <div
-          className="mt-[18px] flex flex-wrap items-center gap-[15px] rounded-shop border border-[#ddd] bg-[#ededed] p-[15px] sm:flex-nowrap sm:px-[22px] sm:py-[18px]"
-          role="alert"
-        >
-          <Icon name="box" />
-          <div className="min-w-0 flex-1">
-            <strong className="text-[15px] font-medium">{error}</strong>
-            <p className="mt-[3px] text-xs text-[#666]">
-              โหลดสินค้าจาก Fake Store API ไม่สำเร็จ กรุณาลองใหม่อีกครั้ง
-            </p>
-          </div>
-          <button
-            type="button"
-            onClick={onRetry}
-            className="
-              inline-flex min-h-[46px] w-full items-center justify-center gap-3
-              rounded-shop border border-[#d4d4d4] bg-white px-[18px] py-2.5
-              text-[13px] font-medium whitespace-nowrap text-shop-ink
-              transition-colors duration-200 hover:bg-[#f0f0f0]
-              motion-reduce:transition-none sm:ml-auto sm:w-auto
-            "
-          >
-            ลองใหม่
-          </button>
-        </div>
-      )}
       <div className="flex min-h-[66px] items-center justify-between text-[13px] text-shop-muted">
         <p aria-live="polite">
           แสดง{" "}
