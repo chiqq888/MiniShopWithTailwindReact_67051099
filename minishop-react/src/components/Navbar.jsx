@@ -6,6 +6,7 @@ import profileIcon from "../assets/user-circle-svgrepo-com.svg";
 const links = [
   { to: "/", label: "Home" },
   { to: "/products", label: "Products" },
+  { to: "/admin/products", label: "Manage Products" },
   { to: "/about", label: "About" },
 ];
 

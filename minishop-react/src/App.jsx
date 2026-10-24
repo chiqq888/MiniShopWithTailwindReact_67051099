@@ -6,6 +6,7 @@ import About from "./pages/About";
 import Profile from "./pages/Profile";
 import Products from "./pages/Products";
 import ProductDetail from "./pages/ProductDetail";
+import ProductManagement from "./pages/ProductManagement";
 import NotFound from "./pages/NotFound";
 import Cart from "./components/Cart";
 import Toast from "./components/Toast";
@@ -92,6 +93,7 @@ function App() {
             }
           />
           <Route path="about" element={<About />} />
+          <Route path="admin/products" element={<ProductManagement />} />
           <Route
             path="products"
             element={
