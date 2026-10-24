@@ -1,21 +1,22 @@
 import { useEffect, useState } from "react";
-import { Link, Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import About from "./pages/About";
-import ProfilePage from "./pages/ProfilePage";
-import ProductCatalog from "./components/ProductCatalog";
-import ProductDetail from "./components/ProductDetail";
+import Profile from "./pages/Profile";
+import Products from "./pages/Products";
+import ProductDetail from "./pages/ProductDetail";
+import NotFound from "./pages/NotFound";
 import Cart from "./components/Cart";
 import Toast from "./components/Toast";
 import { getProducts } from "./models/productModel";
 
 function App() {
+  const navigate = useNavigate();
   const products = getProducts();
   const [cart, setCart] = useState([]);
   const [cartCount, setCartCount] = useState(0);
   const [cartOpen, setCartOpen] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState(null);
   const [notice, setNotice] = useState("");
 
   useEffect(() => {
@@ -30,8 +31,8 @@ function App() {
   function closeCart() {
     setCartOpen(false);
   }
-  function closeDetail() {
-    setSelectedProduct(null);
+  function viewDetail(product) {
+    navigate(`/products/${product.id}`);
   }
   function closeNotice() {
     setNotice("");
@@ -68,14 +69,6 @@ function App() {
     setCartCount((count) => count - item.quantity);
   }
 
-  const catalog = (
-    <ProductCatalog
-      products={products}
-      onAddToCart={addToCart}
-      onViewDetail={setSelectedProduct}
-    />
-  );
-
   return (
     <>
       <Routes>
@@ -83,42 +76,30 @@ function App() {
           <Route
             index
             element={
-              <Home products={products} cartCount={cartCount} onOpenCart={openCart}>
-                {catalog}
-              </Home>
+              <Home
+                products={products}
+                cartCount={cartCount}
+                onOpenCart={openCart}
+                onAddToCart={addToCart}
+                onViewDetail={viewDetail}
+              />
             }
           />
           <Route path="about" element={<About />} />
           <Route
             path="products"
             element={
-              <div className="pt-10 sm:pt-14">
-                <h1 className="mb-6 text-2xl font-medium">Products</h1>
-                {catalog}
-              </div>
+              <Products onAddToCart={addToCart} onViewDetail={viewDetail} />
             }
           />
-          <Route path="profile" element={<ProfilePage />} />
           <Route
-            path="*"
-            element={
-              <section className="py-20 text-center">
-                <h1 className="text-2xl font-medium">404 — ไม่พบหน้าที่ต้องการ</h1>
-                <Link to="/" className="mt-4 inline-block underline underline-offset-4">
-                  กลับหน้าหลัก
-                </Link>
-              </section>
-            }
+            path="products/:id"
+            element={<ProductDetail onAddToCart={addToCart} />}
           />
+          <Route path="profile" element={<Profile />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
-      {selectedProduct && (
-        <ProductDetail
-          product={selectedProduct}
-          onClose={closeDetail}
-          onAddToCart={addToCart}
-        />
-      )}
       {cartOpen && (
         <Cart
           items={cart}

@@ -59,7 +59,7 @@ npm run dev
 1. เปิดหน้าเว็บเพื่อดูรายการสินค้าจากข้อมูลในโปรเจกต์
 2. พิมพ์ชื่อสินค้าในช่องค้นหา หรือเลือกหมวดหมู่เพื่อกรองรายการ
 3. เลือกการเรียงราคาจาก dropdown และใช้ปุ่ม `ล้างตัวกรอง` เพื่อกลับไปดูรายการทั้งหมด
-4. กด `View Detail` หรือรูปสินค้าเพื่อดูรายละเอียด
+4. กด `View Detail` หรือรูปสินค้าเพื่อไปหน้า `/products/:id` และกด `Continue Shopping` เพื่อกลับไป `/products`
 5. กด `Add to Cart` เพื่อเพิ่มสินค้า จำนวนสินค้าในตะกร้าจะเพิ่มขึ้นตามจำนวนชิ้น
 6. กดปุ่มตะกร้าที่ Header เพื่อดูรายการ ปรับจำนวน ลบสินค้า และดูราคารวม
 
@@ -70,13 +70,18 @@ npm run dev
 | ไฟล์ | หน้าที่ |
 | --- | --- |
 | `src/main.jsx` | จุดเริ่มต้นของ React และนำเข้า CSS กับฟอนต์ |
-| `src/App.jsx` | อ่านสินค้าจาก Model และจัดการ State ของตะกร้า Toast และหน้าต่างรายละเอียด |
+| `src/App.jsx` | กำหนด Routes อ่านสินค้าจาก Model และจัดการ State ของตะกร้าและ Toast |
 | `src/models/productModel.js` | เก็บข้อมูลสินค้าตัวอย่างทั้งหมด พร้อม `getProducts()` และ `getProductById(id)` |
 | `src/components/Header.jsx` | แสดงชื่อร้าน ปุ่มตะกร้า และจำนวนสินค้าในตะกร้า |
 | `src/components/ProductCatalog.jsx` | ค้นหา กรองหมวดหมู่ เรียงราคา และแสดง Empty State เมื่อไม่พบสินค้า |
 | `src/components/ProductList.jsx` | วนแสดงรายการ ProductCard และส่งข้อมูลผ่าน Props |
 | `src/components/ProductCard.jsx` | แสดงสินค้าแต่ละรายการและปุ่มเพิ่มลงตะกร้ากับดูรายละเอียด |
-| `src/components/ProductDetail.jsx` | แสดงรายละเอียดสินค้าในหน้าต่าง Modal |
+| `src/pages/Home.jsx` | หน้า `/` พร้อม Hero และ Featured Products 4 รายการ |
+| `src/pages/About.jsx` | หน้า `/about` แสดงข้อมูลร้าน |
+| `src/pages/Products.jsx` | หน้า `/products` แสดงสินค้าทั้งหมด 20 รายการ พร้อมค้นหา กรอง และเรียงราคา |
+| `src/pages/ProductDetail.jsx` | หน้า `/products/:id` ค้นหาสินค้าด้วย `getProductById(id)` และมีปุ่ม Continue Shopping; แสดง Product not found เมื่อไม่พบ ID |
+| `src/pages/Profile.jsx` | หน้า `/profile` แสดงข้อมูลผู้จัดทำ |
+| `src/pages/NotFound.jsx` | หน้า 404 สำหรับ URL ที่ไม่ตรงกับ Route |
 | `src/components/Cart.jsx` | แสดงรายการสินค้า จำนวน และราคารวมในตะกร้า |
 | `src/components/Hero.jsx` | แสดงภาพแบนเนอร์แบบสไลด์ |
 | `src/components/Footer.jsx` และ `src/components/Profile.jsx` | แสดงข้อมูลผู้จัดทำที่ท้ายหน้าเว็บ |

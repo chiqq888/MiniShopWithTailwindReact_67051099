@@ -1,14 +1,41 @@
-import Modal from "./Modal";
-import ProductImage from "./ProductImage";
-import Icon from "./Icon";
+import { useNavigate, useParams } from "react-router-dom";
+import ProductImage from "../components/ProductImage";
+import Icon from "../components/Icon";
+import { getProductById } from "../models/productModel";
 
-function ProductDetail({ product, onClose, onAddToCart }) {
+function ProductDetail({ onAddToCart }) {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const product = getProductById(id);
+
+  const continueShopping = (
+    <button
+      type="button"
+      onClick={() => navigate("/products")}
+      className="inline-flex min-h-11 items-center justify-center rounded-shop border border-shop-border bg-white px-[18px] py-2.5 text-sm transition-colors hover:bg-shop-surface motion-reduce:transition-none"
+    >
+      Continue Shopping
+    </button>
+  );
+
+  if (!product) {
+    return (
+      <section className="py-20 text-center">
+        <h1 className="text-2xl font-medium">Product not found</h1>
+        <p className="mt-3 text-shop-muted">ไม่พบสินค้าที่ต้องการ</p>
+        <div className="mt-6">{continueShopping}</div>
+      </section>
+    );
+  }
+
   function handleAddToCart() {
     onAddToCart(product);
   }
 
   return (
-    <Modal title="รายละเอียดสินค้า" onClose={onClose}>
+    <section className="py-10 sm:py-14" aria-labelledby="product-title">
+      <div className="mb-6">{continueShopping}</div>
+      <p className="mb-6 text-sm text-shop-muted">รายละเอียดสินค้า</p>
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-[30px]">
         <div
           className="
@@ -27,9 +54,9 @@ function ProductDetail({ product, onClose, onAddToCart }) {
             {product.category}
           </span>
 
-          <h3 className="my-2.5 text-[22px] font-medium leading-[1.5]">
+          <h1 id="product-title" className="my-2.5 text-[22px] font-medium leading-[1.5]">
             {product.title}
-          </h3>
+          </h1>
 
           <div className="inline-flex items-center gap-[5px] text-[10px] text-[#656565] sm:text-xs">
             <Icon name="star" className="size-3 sm:size-3.5" />
@@ -62,7 +89,7 @@ function ProductDetail({ product, onClose, onAddToCart }) {
       <p className="mt-6 border-t border-[#e4e4e4] pt-4 text-[11px] leading-[1.8] text-[#808080]">
         ข้อมูล และราคาไม่ใช่ของจริง เป็นข้อมูลจาก Fake Store API
       </p>
-    </Modal>
+    </section>
   );
 }
 
