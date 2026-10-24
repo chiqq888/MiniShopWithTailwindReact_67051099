@@ -18,6 +18,7 @@ function App() {
   const [cartCount, setCartCount] = useState(0);
   const [cartOpen, setCartOpen] = useState(false);
   const [notice, setNotice] = useState("");
+  const [user, setUser] = useState({ name: "MiniShop User", email: "user@example.com" });
 
   useEffect(() => {
     if (!notice) return;
@@ -36,6 +37,11 @@ function App() {
   }
   function closeNotice() {
     setNotice("");
+  }
+
+  function saveUser(profile) {
+    setUser(profile);
+    setNotice("บันทึกข้อมูลโปรไฟล์แล้ว");
   }
 
   function addToCart(product) {
@@ -96,7 +102,10 @@ function App() {
             path="products/:id"
             element={<ProductDetail onAddToCart={addToCart} />}
           />
-          <Route path="profile" element={<Profile />} />
+          <Route
+            path="profile"
+            element={<Profile user={user} onSaveUser={saveUser} cart={cart} cartCount={cartCount} onOpenCart={openCart} />}
+          />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

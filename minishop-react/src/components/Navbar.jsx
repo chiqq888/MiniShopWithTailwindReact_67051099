@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Link, NavLink, useMatch, useNavigate } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import Icon from "./Icon";
 import profileIcon from "../assets/user-circle-svgrepo-com.svg";
 
@@ -10,8 +10,6 @@ const links = [
 ];
 
 function Navbar({ cartCount, onOpenCart }) {
-  const navigate = useNavigate();
-  const isProfileActive = Boolean(useMatch("/profile/*"));
   const headerRef = useRef(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const floatingShadow = isScrolled ? "shadow-lg shadow-black/10" : "";
@@ -83,24 +81,26 @@ function Navbar({ cartCount, onOpenCart }) {
             <span className="inline-block translate-y-0.5">{cartCount}</span>
           </span>
         </button>
-        <button
-          type="button"
-          onClick={() => navigate("/profile")}
+        <NavLink
+          to="/profile"
           aria-label="Profile"
-          aria-current={isProfileActive ? "page" : undefined}
           title="Profile"
-          className={`grid size-11 place-items-center rounded-shop border transition-colors motion-reduce:transition-none ${
-            isProfileActive
-              ? "border-shop-ink bg-shop-ink"
-              : "border-shop-border bg-white hover:bg-shop-surface"
-          } ${floatingShadow}`}
+          className={({ isActive }) =>
+            `grid size-11 place-items-center rounded-shop border transition-colors motion-reduce:transition-none ${
+              isActive
+                ? "border-shop-ink bg-shop-ink"
+                : "border-shop-border bg-white hover:bg-shop-surface"
+            } ${floatingShadow}`
+          }
         >
-          <img
-            src={profileIcon}
-            alt=""
-            className={`size-7 ${isProfileActive ? "brightness-0 invert" : ""}`}
-          />
-        </button>
+          {({ isActive }) => (
+            <img
+              src={profileIcon}
+              alt=""
+              className={`size-7 ${isActive ? "brightness-0 invert" : ""}`}
+            />
+          )}
+        </NavLink>
       </div>
     </header>
     </>

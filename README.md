@@ -1,6 +1,6 @@
-# MiniShop React
+# MiniShop React Lab Week 9
 
-เว็บไซต์ร้านค้าตัวอย่างสำหรับฝึกพัฒนาด้วย React ตามใบงาน Week 6–8 โดยใช้ Component, Props, State, Event และข้อมูลสินค้าใน Model เพื่อแสดงสินค้า พร้อมตกแต่งด้วย Tailwind CSS
+เว็บไซต์ร้านค้าตัวอย่างสำหรับฝึกพัฒนาด้วย React โดยใช้ Component, Props, State, Event และข้อมูลสินค้าใน Model พร้อมแบ่งหน้าด้วย React Router v6 และตกแต่งด้วย Tailwind CSS
 
 ## ฟีเจอร์
 
@@ -20,6 +20,7 @@
 | เทคโนโลยี | การใช้งาน |
 | --- | --- |
 | React 19 และ JavaScript (JSX) | สร้าง Component และจัดการ State กับ Event |
+| React Router v6 | กำหนดเส้นทางและเปลี่ยนหน้าภายใต้ Layout ร่วมกัน |
 | Vite 8 | รันโปรเจกต์ระหว่างพัฒนาและ build ไฟล์สำหรับนำไปใช้งาน |
 | Tailwind CSS 4 | ตกแต่งหน้าเว็บและจัด layout ให้รองรับหลายขนาดหน้าจอ |
 | Fake Store API | แหล่งข้อมูลตัวอย่างที่ดึงมาบันทึกไว้ในโปรเจกต์ระหว่างพัฒนา |
@@ -61,7 +62,7 @@ npm run dev
 3. เลือกการเรียงราคาจาก dropdown และใช้ปุ่ม `ล้างตัวกรอง` เพื่อกลับไปดูรายการทั้งหมด
 4. กด `View Detail` หรือรูปสินค้าเพื่อไปหน้า `/products/:id` และกด `Continue Shopping` เพื่อกลับไป `/products`
 5. กด `Add to Cart` เพื่อเพิ่มสินค้า จำนวนสินค้าในตะกร้าจะเพิ่มขึ้นตามจำนวนชิ้น
-6. กดปุ่มตะกร้าที่ Header เพื่อดูรายการ ปรับจำนวน ลบสินค้า และดูราคารวม
+6. กดปุ่มตะกร้าที่ Navbar เพื่อดูรายการ ปรับจำนวน ลบสินค้า และดูราคารวม
 
 ## ไฟล์และ Component หลัก
 
@@ -72,7 +73,8 @@ npm run dev
 | `src/main.jsx` | จุดเริ่มต้นของ React และนำเข้า CSS กับฟอนต์ |
 | `src/App.jsx` | กำหนด Routes อ่านสินค้าจาก Model และจัดการ State ของตะกร้าและ Toast |
 | `src/models/productModel.js` | เก็บข้อมูลสินค้าตัวอย่างทั้งหมด พร้อม `getProducts()` และ `getProductById(id)` |
-| `src/components/Header.jsx` | แสดงชื่อร้าน ปุ่มตะกร้า และจำนวนสินค้าในตะกร้า |
+| `src/components/Navbar.jsx` | แสดงชื่อร้าน ลิงก์ Home, Products, About และ Profile พร้อมปุ่มตะกร้าและจำนวนสินค้า |
+| `src/components/Layout.jsx` | ใช้ Navbar และ Footer ร่วมกันทุกหน้า และใช้ `Outlet` แสดงหน้าที่ตรงกับ Route |
 | `src/components/ProductCatalog.jsx` | ค้นหา กรองหมวดหมู่ เรียงราคา และแสดง Empty State เมื่อไม่พบสินค้า |
 | `src/components/ProductList.jsx` | วนแสดงรายการ ProductCard และส่งข้อมูลผ่าน Props |
 | `src/components/ProductCard.jsx` | แสดงสินค้าแต่ละรายการและปุ่มเพิ่มลงตะกร้ากับดูรายละเอียด |
@@ -80,12 +82,18 @@ npm run dev
 | `src/pages/About.jsx` | หน้า `/about` แสดงข้อมูลร้าน |
 | `src/pages/Products.jsx` | หน้า `/products` แสดงสินค้าทั้งหมด 20 รายการ พร้อมค้นหา กรอง และเรียงราคา |
 | `src/pages/ProductDetail.jsx` | หน้า `/products/:id` ค้นหาสินค้าด้วย `getProductById(id)` และมีปุ่ม Continue Shopping; แสดง Product not found เมื่อไม่พบ ID |
-| `src/pages/Profile.jsx` | หน้า `/profile` แสดงข้อมูลผู้จัดทำ |
+| `src/pages/Profile.jsx` | หน้า `/profile` แสดงบัญชีผู้ใช้งานตัวอย่าง แก้ไขชื่อและอีเมล พร้อมสรุปตะกร้าปัจจุบัน; ข้อมูลเริ่มใหม่เมื่อรีเฟรชหน้า |
 | `src/pages/NotFound.jsx` | หน้า 404 สำหรับ URL ที่ไม่ตรงกับ Route |
 | `src/components/Cart.jsx` | แสดงรายการสินค้า จำนวน และราคารวมในตะกร้า |
 | `src/components/Hero.jsx` | แสดงภาพแบนเนอร์แบบสไลด์ |
 | `src/components/Footer.jsx` และ `src/components/Profile.jsx` | แสดงข้อมูลผู้จัดทำที่ท้ายหน้าเว็บ |
 | `src/index.css` | ตั้งค่า Tailwind CSS ฟอนต์ สี และรูปแบบพื้นฐาน |
+
+## การเปลี่ยนหน้าด้วย React Router
+
+- `Link` สร้างลิงก์เปลี่ยนหน้าโดยไม่โหลดเว็บไซต์ใหม่ เช่น ลิงก์ดูสินค้าทั้งหมดไปยัง `/products` ส่วน `NavLink` ใช้สร้างลิงก์ที่ตรวจสถานะหน้าปัจจุบันได้ เช่น เมนูใน Navbar และลิงก์ไอคอน Profile ซึ่งเปิดในแท็บใหม่ได้ตามปกติ
+- `useNavigate()` คืนฟังก์ชันสำหรับสั่งเปลี่ยนหน้าจากโค้ด เช่น ปุ่ม `Continue Shopping` เรียก `navigate("/products")` เพื่อกลับไปหน้ารายการสินค้า
+- `useParams()` อ่านค่าพารามิเตอร์จาก URL ตาม Route เช่น `/products/:id` เมื่อเปิด `/products/3` จะได้ `id` เป็น string `"3"` แล้วส่งให้ `getProductById(id)` แปลงเป็นตัวเลขก่อนค้นหาใน Model
 
 ## แหล่งข้อมูลสินค้า
 

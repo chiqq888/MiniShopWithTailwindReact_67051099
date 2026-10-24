@@ -1,7 +1,8 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import ProductImage from "../components/ProductImage";
+import ProductList from "../components/ProductList";
 import Icon from "../components/Icon";
-import { getProductById } from "../models/productModel";
+import { getProductById, getProducts } from "../models/productModel";
 
 function ProductDetail({ onAddToCart }) {
   const { id } = useParams();
@@ -12,7 +13,7 @@ function ProductDetail({ onAddToCart }) {
     <button
       type="button"
       onClick={() => navigate("/products")}
-      className="inline-flex min-h-11 items-center justify-center rounded-shop border border-shop-border bg-white px-[18px] py-2.5 text-sm transition-colors hover:bg-shop-surface motion-reduce:transition-none"
+      className="inline-flex min-h-[46px] min-w-[160px] flex-1 items-center justify-center rounded-shop border border-shop-border bg-white px-[18px] py-2.5 text-sm transition-colors hover:bg-shop-surface motion-reduce:transition-none"
     >
       Continue Shopping
     </button>
@@ -32,9 +33,18 @@ function ProductDetail({ onAddToCart }) {
     onAddToCart(product);
   }
 
+  const otherProducts = getProducts()
+    .filter((item) => item.id !== product.id)
+    .sort((a, b) => Number(b.category === product.category) - Number(a.category === product.category))
+    .slice(0, 4);
+
+  function viewOtherProduct(item) {
+    navigate(`/products/${item.id}`);
+    window.scrollTo(0, 0);
+  }
+
   return (
     <section className="py-10 sm:py-14" aria-labelledby="product-title">
-      <div className="mb-6">{continueShopping}</div>
       <p className="mb-6 text-sm text-shop-muted">รายละเอียดสินค้า</p>
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-[30px]">
         <div
@@ -70,11 +80,12 @@ function ProductDetail({ onAddToCart }) {
             {product.description}
           </p>
 
+          <div className="mt-[17px] flex flex-wrap gap-3">
           <button
             type="button"
             onClick={handleAddToCart}
             className="
-              mt-[17px] inline-flex min-h-[46px] w-full items-center justify-center gap-3
+              inline-flex min-h-[46px] min-w-[150px] flex-1 items-center justify-center gap-3
               rounded-shop border border-shop-ink bg-shop-ink px-[18px] py-2.5
               font-medium text-white transition-colors duration-200
               hover:bg-[#454545] motion-reduce:transition-none
@@ -83,12 +94,30 @@ function ProductDetail({ onAddToCart }) {
             <Icon name="cart" white />
             Add to Cart
           </button>
+          {continueShopping}
+          </div>
         </div>
       </div>
 
       <p className="mt-6 border-t border-[#e4e4e4] pt-4 text-[11px] leading-[1.8] text-[#808080]">
         ข้อมูล และราคาไม่ใช่ของจริง เป็นข้อมูลจาก Fake Store API
       </p>
+      {otherProducts.length > 0 && (
+        <section className="mt-10 sm:mt-14" aria-labelledby="other-products-title">
+          <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <p className="text-[11px] tracking-[2px] text-shop-muted">MORE TO DISCOVER</p>
+              <h2 id="other-products-title" className="mt-2 text-2xl font-medium">สินค้าอื่น ๆ ที่น่าสนใจ</h2>
+            </div>
+            <Link to="/products" className="text-sm text-shop-muted underline underline-offset-4">ดูสินค้าทั้งหมด</Link>
+          </div>
+          <ProductList
+            products={otherProducts}
+            onAddToCart={onAddToCart}
+            onViewDetail={viewOtherProduct}
+          />
+        </section>
+      )}
     </section>
   );
 }
