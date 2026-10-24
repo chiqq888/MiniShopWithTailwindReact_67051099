@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import Header from "./components/Header";
-import Hero from "./components/Hero";
-import ShopStats from "./components/ShopStats";
+import { Link, Route, Routes } from "react-router-dom";
+import Layout from "./components/Layout";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import ProfilePage from "./pages/ProfilePage";
 import ProductCatalog from "./components/ProductCatalog";
 import ProductDetail from "./components/ProductDetail";
 import Cart from "./components/Cart";
-import Footer from "./components/Footer";
 import Toast from "./components/Toast";
 
 function App() {
@@ -102,45 +103,53 @@ function App() {
     setCartCount((count) => count - item.quantity);
   }
 
+  const catalog = (
+    <ProductCatalog
+      products={products}
+      loading={loading}
+      error={error}
+      onRetry={retry}
+      onAddToCart={addToCart}
+      onViewDetail={setSelectedProduct}
+    />
+  );
+
   return (
-    <div className="min-h-screen">
-      <a
-        className="fixed -top-20 left-5 z-20 rounded-shop bg-shop-ink p-3 text-white focus:top-2.5"
-        href="#main"
-      >
-        ข้ามไปยังเนื้อหา
-      </a>
-      <Header cartCount={cartCount} onOpenCart={openCart} />
-      <main id="main" className="mx-auto w-[90%] max-w-[1320px]">
-        <div className="mt-[26px] mb-[26px] flex items-center justify-between gap-4 sm:mt-[38px]">
-          <div>
-            <p className="text-[11px] font-medium tracking-[2px] text-[#717171]">
-              YOUR EVERYDAY, SIMPLIFIED
-            </p>
-            <h1 className="mt-[7px] text-xl font-medium tracking-[-.5px] sm:text-2xl">
-              เลือกสิ่งที่ใช่ ให้ทุกวันของคุณ
-            </h1>
-          </div>
-          <span className="hidden text-[11px] tracking-[2px] text-[#777] md:inline">
-            MINISHOP / 2026
-          </span>
-        </div>
-        <Hero />
-        <ShopStats
-          products={products}
-          cartCount={cartCount}
-          onOpenCart={openCart}
-        />
-        <ProductCatalog
-          products={products}
-          loading={loading}
-          error={error}
-          onRetry={retry}
-          onAddToCart={addToCart}
-          onViewDetail={setSelectedProduct}
-        />
-        <Footer />
-      </main>
+    <>
+      <Routes>
+        <Route element={<Layout cartCount={cartCount} onOpenCart={openCart} />}>
+          <Route
+            index
+            element={
+              <Home products={products} cartCount={cartCount} onOpenCart={openCart}>
+                {catalog}
+              </Home>
+            }
+          />
+          <Route path="about" element={<About />} />
+          <Route
+            path="products"
+            element={
+              <div className="pt-10 sm:pt-14">
+                <h1 className="mb-6 text-2xl font-medium">Products</h1>
+                {catalog}
+              </div>
+            }
+          />
+          <Route path="profile" element={<ProfilePage />} />
+          <Route
+            path="*"
+            element={
+              <section className="py-20 text-center">
+                <h1 className="text-2xl font-medium">404 — ไม่พบหน้าที่ต้องการ</h1>
+                <Link to="/" className="mt-4 inline-block underline underline-offset-4">
+                  กลับหน้าหลัก
+                </Link>
+              </section>
+            }
+          />
+        </Route>
+      </Routes>
       {selectedProduct && (
         <ProductDetail
           product={selectedProduct}
@@ -158,7 +167,7 @@ function App() {
         />
       )}
       <Toast message={notice} onClose={closeNotice} />
-    </div>
+    </>
   );
 }
 export default App;
