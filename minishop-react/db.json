@@ -3,17 +3,20 @@
     {
       "id": 1,
       "name": "Laptop",
-      "price": 25000
+      "price": 25000,
+      "category": "Computer"
     },
     {
       "id": 2,
       "name": "Keyboard",
-      "price": 1500
+      "price": 1500,
+      "category": "Computer"
     },
     {
       "id": 3,
       "name": "Monitor",
-      "price": 6500
+      "price": 6500,
+      "category": "Computer"
     }
   ]
 }

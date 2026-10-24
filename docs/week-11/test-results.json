@@ -1,0 +1,133 @@
+{
+  "testedAt": "2026-10-24T15:54:27.943Z",
+  "browser": "Installed Chrome (Playwright, headless)",
+  "api": "JSON Server 0.17.4, isolated clone on port13001; actual stopped/restarted for error tests",
+  "web": "http://127.0.0.1:15173",
+  "screenshotViewports": [
+    {
+      "name": "desktop",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "name": "mobile",
+      "width": 393,
+      "height": 852
+    }
+  ],
+  "fullPageScreenshots": false,
+  "results": [
+    {
+      "name": "Profile entry, separate AdminLayout, /admin redirect, active navigation",
+      "passed": true,
+      "durationMs": 936
+    },
+    {
+      "name": "Dashboard real API totals: 3 products, THB33000, 1 category",
+      "passed": true,
+      "durationMs": 152
+    },
+    {
+      "name": "Loading states on both API pages (delayed real GET)",
+      "passed": true,
+      "durationMs": 2024
+    },
+    {
+      "name": "Validation: empty/whitespace name, blank/0/negative/non-number price never POST",
+      "passed": true,
+      "durationMs": 998
+    },
+    {
+      "name": "Cancel, Escape and backdrop close without saving; reopening resets form",
+      "passed": true,
+      "durationMs": 383
+    },
+    {
+      "name": "Create via POST, all fields, numeric price, guard double-submit; Dashboard refetch",
+      "passed": true,
+      "durationMs": 1305
+    },
+    {
+      "name": "Edit prefilled modal via PUT, price450->490 and preserve untouched extra field",
+      "passed": true,
+      "durationMs": 601
+    },
+    {
+      "name": "Delete confirmation cancel preserves record; confirm removes from API/table/dashboard",
+      "passed": true,
+      "durationMs": 515
+    },
+    {
+      "name": "Optional icon/description can be blank and each category can be saved",
+      "passed": true,
+      "durationMs": 1696
+    },
+    {
+      "name": "Empty states and zero summaries; first-five table with seven real API records",
+      "passed": true,
+      "durationMs": 2174
+    },
+    {
+      "name": "Real stopped API: Dashboard and Products error + Retry recover",
+      "passed": true,
+      "durationMs": 1498
+    },
+    {
+      "name": "Real stopped API during save: retain modal/input, show error, retry saves successfully",
+      "passed": true,
+      "durationMs": 1024
+    },
+    {
+      "name": "HTTP500 update/delete error messages preserve form/record (injected response)",
+      "passed": true,
+      "durationMs": 641
+    },
+    {
+      "name": "Light/dark token change, localStorage and refresh persistence",
+      "passed": true,
+      "durationMs": 916
+    },
+    {
+      "name": "Responsive desktop1440x1000/mobile393x852, both themes, horizontal table scroll and contained modal",
+      "passed": true,
+      "durationMs": 3103
+    },
+    {
+      "name": "Storefront regression: Home/Products/search/filter/sort/detail/profile/cart under saved dark theme",
+      "passed": true,
+      "durationMs": 2978
+    },
+    {
+      "name": "No React runtime errors; original database and seed records unchanged",
+      "passed": true,
+      "durationMs": 25
+    }
+  ],
+  "runtimeErrors": [],
+  "screenshots": [
+    "desktop-02-validation.png",
+    "desktop-03-created.png",
+    "desktop-04-dashboard-after-create.png",
+    "desktop-05-updated.png",
+    "desktop-06-deleted.png",
+    "desktop-07-empty-dashboard.png",
+    "desktop-08-empty-products.png",
+    "desktop-09-api-stopped-dashboard.png",
+    "desktop-10-api-stopped-products.png",
+    "desktop-11-save-error-retains-form.png",
+    "desktop-dashboard-light.png",
+    "desktop-modal-light.png",
+    "desktop-products-light.png",
+    "mobile-dashboard-light.png",
+    "mobile-modal-light.png",
+    "mobile-products-light.png",
+    "desktop-dashboard-dark.png",
+    "desktop-modal-dark.png",
+    "desktop-products-dark.png",
+    "mobile-dashboard-dark.png",
+    "mobile-modal-dark.png",
+    "mobile-products-dark.png",
+    "desktop-storefront-profile.png",
+    "mobile-storefront-profile.png"
+  ]
+}

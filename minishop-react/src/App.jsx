@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import Layout from "./components/Layout";
+import AdminLayout from "./components/AdminLayout";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Profile from "./pages/Profile";
 import Products from "./pages/Products";
 import ProductDetail from "./pages/ProductDetail";
 import ProductManagement from "./pages/ProductManagement";
+import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
 import Cart from "./components/Cart";
 import Toast from "./components/Toast";
@@ -79,6 +81,11 @@ function App() {
   return (
     <>
       <Routes>
+        <Route path="admin" element={<AdminLayout />}>
+          <Route index element={<Navigate to="dashboard" replace />} />
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="products" element={<ProductManagement />} />
+        </Route>
         <Route element={<Layout cartCount={cartCount} onOpenCart={openCart} />}>
           <Route
             index
@@ -93,7 +100,6 @@ function App() {
             }
           />
           <Route path="about" element={<About />} />
-          <Route path="admin/products" element={<ProductManagement />} />
           <Route
             path="products"
             element={

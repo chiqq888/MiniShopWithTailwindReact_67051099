@@ -4,7 +4,7 @@ import Footer from "./Footer";
 
 function Layout({ cartCount, onOpenCart }) {
   return (
-    <div className="flex min-h-screen flex-col">
+    <div data-theme="light" className="flex min-h-screen flex-col">
       <a
         className="fixed -top-20 left-5 z-20 rounded-shop bg-shop-ink p-3 text-white focus:top-2.5"
         href="#main"

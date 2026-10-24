@@ -1,4 +1,5 @@
-const API_URL = "http://localhost:3001/products";
+// ค่าเริ่มต้นใช้ JSON Server เดิม; override ได้เมื่อต้องใช้ API แยกสำหรับทดสอบ
+const API_URL = import.meta.env.VITE_PRODUCT_API_URL || "http://localhost:3001/products";
 
 async function readResponse(response, readBody = true) {
   // fetch ไม่โยน Error เมื่อได้ 404/500 จึงต้องตรวจ response.ok เอง
@@ -17,7 +18,9 @@ async function readResponse(response, readBody = true) {
 // GET อ่านรายการสินค้า โดยยกเลิกคำขอได้ผ่าน AbortSignal
 export async function getProducts(options = {}) {
   const response = await fetch(API_URL, { signal: options.signal });
-  return readResponse(response);
+  const products = await readResponse(response);
+  if (!Array.isArray(products)) throw new Error("ข้อมูลสินค้าจาก API ไม่ถูกต้อง");
+  return products;
 }
 
 // POST ส่งสินค้าใหม่เป็น JSON ให้เซิร์ฟเวอร์สร้าง id

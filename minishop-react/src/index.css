@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "daisyui";
 
 @theme {
   --font-sans: "IBM Plex Sans Thai Looped", sans-serif;
@@ -14,6 +15,82 @@
   --breakpoint-md: 801px;
   --breakpoint-lg: 1101px;
   --breakpoint-xl: 1600px;
+}
+
+/* ใช้สีตามธีมเฉพาะ Admin และเก็บฟอนต์/มุมโค้งของหน้าร้านเดิม */
+.admin-shell {
+  --radius-box: 15px;
+  --radius-field: 15px;
+  --radius-selector: 10px;
+  --color-primary: var(--color-base-content);
+  --color-primary-content: var(--color-base-100);
+  --color-error: #b42332;
+  --color-error-content: #ffffff;
+  --color-success: #276749;
+  --color-success-content: #ffffff;
+  --border: 1px;
+}
+
+:root[data-theme="dark"] .admin-shell {
+  --color-error: #ff8790;
+  --color-error-content: #211013;
+  --color-success: #92d6ac;
+  --color-success-content: #0c2815;
+}
+
+.admin-shell :focus-visible {
+  outline-color: var(--color-base-content);
+}
+
+.admin-shell .btn {
+  min-height: 44px;
+  font-weight: 500;
+}
+
+/* ปุ่มสีดำและเมนูที่เลือกใช้ผิวเรียบ รวมสถานะ hover/focus */
+.btn.btn-primary,
+.btn.btn-neutral,
+:is(button, a).bg-shop-ink,
+:is(button, a).bg-neutral,
+:is(button, a).hover\:bg-shop-ink:hover {
+  box-shadow: none;
+  text-shadow: none;
+}
+
+/* แสดง popup ทันที โดยไม่ fade หรือขยายกล่องตอนเปิด/ปิด */
+dialog,
+dialog::backdrop,
+dialog .modal-box {
+  animation: none;
+  transition: none;
+}
+
+dialog.modal[open],
+dialog .modal-box {
+  opacity: 1;
+}
+
+dialog .modal-box {
+  scale: none;
+  translate: none;
+}
+
+.admin-shell .input,
+.admin-shell .select,
+.admin-shell .textarea {
+  width: 100%;
+  background-color: var(--color-base-100);
+  color: var(--color-base-content);
+}
+
+.admin-shell .table th,
+.admin-shell .table td {
+  padding: 1rem;
+}
+
+/* ทำให้ dialog ของ Cart ยังคงมีชุดสีสว่างเมื่อกลับจาก Admin ธีมมืด */
+dialog:not(.modal) {
+  color-scheme: light;
 }
 
 @layer base {

@@ -34,7 +34,7 @@ function About() {
             ให้คุณค่อย ๆ เลือกสิ่งที่เข้ากับทุกวันของตัวเอง
           </p>
           <Link to="/products" className="mt-7 inline-flex min-h-11 items-center gap-6 rounded-shop bg-shop-ink px-5 py-3 text-sm text-white transition-colors hover:bg-[#454545]">
-            สำรวจสินค้าทั้งหมด <span aria-hidden="true">↗</span>
+            สำรวจสินค้าทั้งหมด
           </Link>
         </div>
         <div className="relative grid min-h-[280px] place-items-center bg-shop-surface p-8">
@@ -81,7 +81,7 @@ function About() {
         <div className="text-sm leading-8 text-shop-muted">
           <p>MiniShop เป็นโปรเจกต์ฝึกพัฒนาเว็บไซต์ด้วย React ตั้งแต่การจัดหน้าร้าน ไปจนถึงการค้นหาและตะกร้าสินค้า โดยตั้งใจให้ทุกส่วนใช้งานต่อกันได้อย่างเป็นธรรมชาติ</p>
           <p className="mt-3">สินค้าทั้งหมดเป็นข้อมูลตัวอย่างจาก Fake Store API ที่บันทึกไว้ในโปรเจกต์ คุณสามารถทดลองเลือกสินค้าและจัดตะกร้าได้ โดยไม่มีการสั่งซื้อหรือชำระเงินจริง</p>
-          <Link to="/profile" className="mt-4 inline-flex items-center gap-3 font-medium text-shop-ink underline underline-offset-4">ไปโปรไฟล์ของฉัน <span aria-hidden="true">↗</span></Link>
+          <Link to="/profile" className="mt-4 inline-flex items-center gap-3 font-medium text-shop-ink underline underline-offset-4">ไปโปรไฟล์ของฉัน</Link>
         </div>
       </div>
     </section>

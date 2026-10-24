@@ -37,6 +37,13 @@ function Profile({ user, onSaveUser, cart, cartCount, onOpenCart }) {
               <div className="border-t border-shop-border pt-5"><dt className="text-xs text-shop-muted">สถานะบัญชี</dt><dd className="mt-2 inline-flex rounded-full bg-shop-surface px-3 py-1 text-xs">โหมดทดลองใช้งาน</dd></div>
             </dl>
             <p className="mt-6 text-xs leading-6 text-shop-muted">ทดลองแก้ไขข้อมูลและจัดตะกร้าของคุณได้ ข้อมูลจะอยู่ระหว่างใช้งานเว็บและเริ่มใหม่เมื่อรีเฟรชหน้า</p>
+            <div className="mt-6 border-t border-shop-border pt-6">
+              <p className="text-[11px] tracking-[2px] text-shop-muted">STORE MANAGEMENT</p>
+              <p className="mt-3 text-xs leading-6 text-shop-muted">ดูภาพรวมร้านค้าและจัดการสินค้าในพื้นที่ Admin</p>
+              <Link to="/admin/dashboard" className="mt-4 inline-flex min-h-11 w-full items-center justify-between gap-3 rounded-shop bg-shop-ink px-4 py-3 text-sm text-white transition-colors hover:bg-[#454545]">
+                Switch to Admin
+              </Link>
+            </div>
           </div>
         </aside>
         <div className="min-w-0">
@@ -76,7 +83,7 @@ function Profile({ user, onSaveUser, cart, cartCount, onOpenCart }) {
       </div>
       <div className="mt-8 flex flex-col justify-between gap-5 rounded-shop border border-shop-border bg-[#ededed] p-6 sm:flex-row sm:items-center sm:p-8">
         <div><p className="text-[11px] tracking-[2px] text-shop-muted">FIND YOUR NEXT FAVORITE</p><h2 className="mt-2 text-xl font-medium">มีอะไรที่ถูกใจอีกไหม?</h2><p className="mt-2 text-sm text-shop-muted">กลับไปเลือกดูสินค้า แล้วเก็บสิ่งที่ชอบไว้ในตะกร้า</p></div>
-        <Link to="/products" className="inline-flex min-h-11 shrink-0 items-center justify-center gap-6 self-start rounded-shop bg-shop-ink px-5 py-3 text-sm text-white transition-colors hover:bg-[#454545] sm:self-auto">เลือกดูสินค้า <span aria-hidden="true">↗</span></Link>
+        <Link to="/products" className="inline-flex min-h-11 shrink-0 items-center justify-center gap-6 self-start rounded-shop bg-shop-ink px-5 py-3 text-sm text-white transition-colors hover:bg-[#454545] sm:self-auto">เลือกดูสินค้า</Link>
       </div>
     </section>
   );

@@ -130,8 +130,8 @@ function ProductCatalog({
                 onChange={(event) => setSort(event.target.value)}
               >
                 <option value="default">แนะนำสำหรับคุณ</option>
-                <option value="asc">Sort Price Low → High</option>
-                <option value="desc">Sort Price High → Low</option>
+                <option value="asc">Sort Price Low to High</option>
+                <option value="desc">Sort Price High to Low</option>
               </select>
               <svg
                 className="pointer-events-none absolute top-1/2 right-4 size-3.5 -translate-y-1/2 text-[#303030]"
@@ -184,7 +184,7 @@ function ProductCatalog({
             className="rounded-shop p-[7px] text-[13px] text-[#5d5d5d] underline underline-offset-4"
             onClick={resetFilters}
           >
-            ล้างตัวกรอง ↺
+            ล้างตัวกรอง
           </button>
         )}
       </div>

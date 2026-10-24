@@ -169,18 +169,18 @@ function Hero() {
               <span aria-hidden="true">{isPlaying ? "Ⅱ" : "▶"}</span>
             </button>
             <button
-              className="grid size-10 place-items-center rounded-shop border border-[#d5d5d5] bg-white text-xl hover:border-shop-ink hover:bg-shop-ink hover:text-white"
+              className="grid min-h-10 place-items-center rounded-shop border border-[#d5d5d5] bg-white px-3 text-xs hover:border-shop-ink hover:bg-shop-ink hover:text-white"
               aria-label="ภาพก่อนหน้า"
               onClick={() => moveSlide(-1)}
             >
-              ←
+              ก่อนหน้า
             </button>
             <button
-              className="grid size-10 place-items-center rounded-shop border border-[#d5d5d5] bg-white text-xl hover:border-shop-ink hover:bg-shop-ink hover:text-white"
+              className="grid min-h-10 place-items-center rounded-shop border border-[#d5d5d5] bg-white px-3 text-xs hover:border-shop-ink hover:bg-shop-ink hover:text-white"
               aria-label="ภาพถัดไป"
               onClick={() => moveSlide(1)}
             >
-              →
+              ถัดไป
             </button>
           </div>
         </div>
