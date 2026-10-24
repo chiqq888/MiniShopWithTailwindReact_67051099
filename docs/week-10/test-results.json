@@ -1,0 +1,99 @@
+{
+  "checkedAt": "2026-10-24T12:45:27.596Z",
+  "timezone": "Asia/Bangkok",
+  "checks": [
+    "GET collection and GET /products/1 return initial JSON with Laptop id 1",
+    "Initial loading state locks form and then displays real API products",
+    "Whitespace name and price zero are rejected before any POST/PUT/DELETE",
+    "POST creates Mouse price 450, server assigns id, form resets, table reloads",
+    "GET and db.json contain Mouse; product persists after browser reload",
+    "PUT sends complete Mouse object and changes price to 490 in table and API",
+    "Cancel edit and cancel confirmation leave stored product unchanged",
+    "DELETE removes Mouse from table, GET collection, GET id, and db.json",
+    "Simulated connection failure shows actionable error; Retry recovers with real API",
+    "HTTP 500 is handled as an error via response.ok; Retry recovers",
+    "Simulated empty collection shows empty state; Reload restores real products",
+    "Failed POST/PUT preserve form input; failed DELETE preserves row and seed data",
+    "390px mobile layout has no document overflow; table scrolls inside its container",
+    "Existing Week 9 products/cart work; navigation to Manage Products preserves cart",
+    "No uncaught browser JavaScript errors"
+  ],
+  "exchanges": [
+    {
+      "label": "Create Mouse 450",
+      "method": "POST",
+      "url": "http://localhost:3001/products",
+      "requestBody": {
+        "name": "Mouse",
+        "price": 450
+      },
+      "status": 201,
+      "responseBody": {
+        "name": "Mouse",
+        "price": 450,
+        "id": 4
+      }
+    },
+    {
+      "label": "Read list with Mouse",
+      "method": "GET",
+      "url": "http://localhost:3001/products",
+      "requestBody": null,
+      "status": 200,
+      "responseBody": [
+        {
+          "id": 1,
+          "name": "Laptop",
+          "price": 25000
+        },
+        {
+          "id": 2,
+          "name": "Keyboard",
+          "price": 1500
+        },
+        {
+          "id": 3,
+          "name": "Monitor",
+          "price": 6500
+        },
+        {
+          "name": "Mouse",
+          "price": 450,
+          "id": 4
+        }
+      ]
+    },
+    {
+      "label": "Update Mouse 490",
+      "method": "PUT",
+      "url": "http://localhost:3001/products/4",
+      "requestBody": {
+        "name": "Mouse",
+        "price": 490,
+        "id": 4
+      },
+      "status": 200,
+      "responseBody": {
+        "name": "Mouse",
+        "price": 490,
+        "id": 4
+      }
+    },
+    {
+      "label": "Delete Mouse",
+      "method": "DELETE",
+      "url": "http://localhost:3001/products/4",
+      "requestBody": null,
+      "status": 200,
+      "responseBody": {}
+    }
+  ],
+  "simulatedStates": [
+    "loading (delayed real GET)",
+    "network error",
+    "HTTP 500",
+    "empty GET response",
+    "failed mutations"
+  ],
+  "status": "passed"
+}

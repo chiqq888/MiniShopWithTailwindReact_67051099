@@ -1,5 +1,7 @@
 # Week 11 — Advanced UI & Tailwind Components
 
+โค้ดของสัปดาห์นี้เป็นเวอร์ชันล่าสุดที่รวมไว้บน `main` ดูสรุป Week 9–11 และวิธีรันที่ [README หลัก](../README.md)
+
 พัฒนาบน branch `week-11` ต่อจาก Week 10 โดยใช้ React JSX, Vite, React Router เดิม, Tailwind CSS v4, DaisyUI 5.7.50 และ JSON Server 0.17.4
 
 ## เข้าใช้งานและเปิดเซิร์ฟเวอร์
